@@ -1,13 +1,11 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.Serialization;
 
 public class CubeInfo : MonoBehaviour
 {
     private Transform _collisionPoint;
     public int numberOfCube = 2;
     [SerializeField] private GameObject cube;
-    [SerializeField] private Rigidbody cubeRigidbody;
     
     //shit code
     [SerializeField] private TMP_Text text0Number;
@@ -19,7 +17,7 @@ public class CubeInfo : MonoBehaviour
     
     private void Start()
     {
-        //cubeRigidbody.AddForce(Vector3.forward*1000f);
+        cube.GetComponent<Rigidbody>().useGravity = false;
         SetNumber();
     }
 
@@ -30,7 +28,8 @@ public class CubeInfo : MonoBehaviour
             numberOfCube *= 2;
             _collisionPoint = collision.transform;
             Destroy(collision.collider.gameObject);
-            cube = Instantiate(cube, _collisionPoint.position, transform.rotation);
+            Destroy(this);
+            Instantiate(cube, _collisionPoint.position, transform.rotation);
             cube.GetComponent<CubeInfo>().numberOfCube = numberOfCube;
             cube.name = numberOfCube.ToString();
             SetNumber();

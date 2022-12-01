@@ -1066,6 +1066,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cube: {fileID: 7166008725871899730, guid: f6883814681026d4e8f300d22706834f, type: 3}
   spawnPoint: {fileID: 1409068097}
+  startNumber: 020000000400000008000000100000002000000040000000
 --- !u!65 &1409068101
 BoxCollider:
   m_ObjectHideFlags: 0

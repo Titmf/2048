@@ -9,19 +9,18 @@ public class Fabric : MonoBehaviour
     private void Start()
     {
         CreateCube(2, spawnPoint);
-        cube.GetComponent<Rigidbody>().useGravity = false;
     }
-
-    private void OnMouseDown()
+    
+    private void OnMouseUp()
     {
-        cube.GetComponent<Rigidbody>().useGravity = true;
         cube.GetComponent<Rigidbody>().AddForce(Vector3.forward*1000f);
+        cube.GetComponent<Rigidbody>().useGravity = true;
         CreateCube(startNumber[new System.Random().Next(0, startNumber.Length)], spawnPoint);
     }
 
     private void CreateCube(int startNumberOfCube, Transform spawnPointOfCube)
     {
-        cube = Instantiate(cube, spawnPointOfCube.position, transform.rotation);
+        cube = Instantiate(cube, spawnPointOfCube.position, transform.rotation.normalized);
         cube.GetComponent<CubeInfo>().numberOfCube = startNumberOfCube;
         cube.name = startNumberOfCube.ToString();
     }
