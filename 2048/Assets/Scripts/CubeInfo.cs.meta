@@ -4,7 +4,14 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
+  - cube: {fileID: 7166008725871899730, guid: f6883814681026d4e8f300d22706834f, type: 3}
   - cubeRigidbody: {fileID: -484311508857295669, guid: f6883814681026d4e8f300d22706834f, type: 3}
+  - text0Number: {instanceID: 0}
+  - text1Number: {instanceID: 0}
+  - text2Number: {instanceID: 0}
+  - text3Number: {instanceID: 0}
+  - text4Number: {instanceID: 0}
+  - text5Number: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
