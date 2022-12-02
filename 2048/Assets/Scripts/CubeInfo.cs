@@ -27,9 +27,7 @@ public class CubeInfo : MonoBehaviour
         {
             numberOfCube *= 2;
             _collisionPoint = collision.transform;
-            Destroy(collision.collider.gameObject);
-            Destroy(this);
-            Instantiate(cube, _collisionPoint.position, transform.rotation);
+            Destroy(collision.gameObject);
             cube.GetComponent<CubeInfo>().numberOfCube = numberOfCube;
             cube.name = numberOfCube.ToString();
             SetNumber();
@@ -46,4 +44,4 @@ public class CubeInfo : MonoBehaviour
         text4Number.text = numberOfCube.ToString();
         text5Number.text = numberOfCube.ToString();
     }
-}        
+} 
