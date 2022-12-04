@@ -13,7 +13,7 @@ public class Fabric : MonoBehaviour
     
     private void OnMouseUp()
     {
-        cube.GetComponent<Rigidbody>().AddForce(Vector3.forward*1000f);
+        cube.GetComponent<Rigidbody>().AddForce(Vector3.forward*2000f);
         cube.GetComponent<Rigidbody>().useGravity = true;
         CreateCube(startNumber[new System.Random().Next(0, startNumber.Length)], spawnPoint);
     }

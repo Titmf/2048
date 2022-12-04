@@ -930,7 +930,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 4d049529021f8a94cabb2bc1e1770b3d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -994,13 +994,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfCube: 2
+  textNumbers:
+  - {fileID: 5601879124068219032}
+  - {fileID: 7176339956099464788}
+  - {fileID: 2427803132167045096}
+  - {fileID: 7466332797932489893}
+  - {fileID: 333927787120197461}
+  - {fileID: 1793814350461074809}
   cube: {fileID: 7166008725871899730}
-  text0Number: {fileID: 5601879124068219032}
-  text1Number: {fileID: 7176339956099464788}
-  text2Number: {fileID: 2427803132167045096}
-  text3Number: {fileID: 7466332797932489893}
-  text4Number: {fileID: 333927787120197461}
-  text5Number: {fileID: 1793814350461074809}
 --- !u!1 &7882283278994810517
 GameObject:
   m_ObjectHideFlags: 0

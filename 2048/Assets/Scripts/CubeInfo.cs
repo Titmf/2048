@@ -1,23 +1,23 @@
+using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
 public class CubeInfo : MonoBehaviour
 {
-    private Transform _collisionPoint;
     public int numberOfCube = 2;
+    [SerializeField] private List<TMP_Text> textNumbers;
     [SerializeField] private GameObject cube;
-    
-    //shit code
-    [SerializeField] private TMP_Text text0Number;
-    [SerializeField] private TMP_Text text1Number;
-    [SerializeField] private TMP_Text text2Number;
-    [SerializeField] private TMP_Text text3Number;
-    [SerializeField] private TMP_Text text4Number;
-    [SerializeField] private TMP_Text text5Number;
-    
+
+    private Renderer _rendererOfCube;
+    private Rigidbody _rigidOfCube;
+
+    private static readonly int Color2 = Shader.PropertyToID("_Color2");
+
     private void Start()
     {
-        cube.GetComponent<Rigidbody>().useGravity = false;
+        _rigidOfCube = cube.GetComponent<Rigidbody>();
+        _rendererOfCube = GetComponent<Renderer>();
+        _rigidOfCube.useGravity = false;
         SetNumber();
     }
 
@@ -26,22 +26,20 @@ public class CubeInfo : MonoBehaviour
         if (collision.gameObject.CompareTag("cube") && this.name == collision.gameObject.name)
         {
             numberOfCube *= 2;
-            _collisionPoint = collision.transform;
+            var collisionPoint = collision.transform.position;
             Destroy(collision.gameObject);
             cube.GetComponent<CubeInfo>().numberOfCube = numberOfCube;
             cube.name = numberOfCube.ToString();
             SetNumber();
+            _rigidOfCube.AddForce(collisionPoint+Vector3.up*200f);
+            _rendererOfCube.material.SetColor(Color2, Color.red);
         }
     }
     
-    //shit code again
     private void SetNumber()
     {
-        text0Number.text = numberOfCube.ToString();
-        text1Number.text = numberOfCube.ToString();
-        text2Number.text = numberOfCube.ToString();
-        text3Number.text = numberOfCube.ToString();
-        text4Number.text = numberOfCube.ToString();
-        text5Number.text = numberOfCube.ToString();
+        for (int i = 0; i < 6; i++) {
+            textNumbers[i].text = numberOfCube.ToString();
+        }
     }
 } 
