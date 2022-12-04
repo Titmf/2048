@@ -18,7 +18,7 @@ public class CubeInfo : MonoBehaviour
         _rigidOfCube = cube.GetComponent<Rigidbody>();
         _rendererOfCube = GetComponent<Renderer>();
         _rigidOfCube.useGravity = false;
-        SetNumber();
+        SetNumberAndColor();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -28,18 +28,18 @@ public class CubeInfo : MonoBehaviour
             numberOfCube *= 2;
             var collisionPoint = collision.transform.position;
             Destroy(collision.gameObject);
-            cube.GetComponent<CubeInfo>().numberOfCube = numberOfCube;
             cube.name = numberOfCube.ToString();
-            SetNumber();
+            SetNumberAndColor();
             _rigidOfCube.AddForce(collisionPoint+Vector3.up*200f);
-            _rendererOfCube.material.SetColor(Color2, Color.red);
         }
     }
     
-    private void SetNumber()
+    private void SetNumberAndColor()
     {
         for (int i = 0; i < 6; i++) {
             textNumbers[i].text = numberOfCube.ToString();
         }
+        Color customColor = new Color(1.0f/numberOfCube, 2.0f/numberOfCube, 0.7f, 1.0f);
+        _rendererOfCube.material.color= customColor;
     }
 } 
