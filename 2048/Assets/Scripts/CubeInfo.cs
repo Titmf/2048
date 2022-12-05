@@ -7,11 +7,9 @@ public class CubeInfo : MonoBehaviour
     public int numberOfCube = 2;
     [SerializeField] private List<TMP_Text> textNumbers;
     [SerializeField] private GameObject cube;
-
+    
     private Renderer _rendererOfCube;
     private Rigidbody _rigidOfCube;
-
-    private static readonly int Color2 = Shader.PropertyToID("_Color2");
 
     private void Start()
     {
@@ -30,7 +28,7 @@ public class CubeInfo : MonoBehaviour
             Destroy(collision.gameObject);
             cube.name = numberOfCube.ToString();
             SetNumberAndColor();
-            _rigidOfCube.AddForce(collisionPoint+Vector3.up*200f);
+            _rigidOfCube.AddForce(collisionPoint*numberOfCube+Vector3.up*200f);
         }
     }
     
