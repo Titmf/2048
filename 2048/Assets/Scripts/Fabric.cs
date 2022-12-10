@@ -21,7 +21,7 @@ public class Fabric : MonoBehaviour
     private void CreateCube(int startNumberOfCube, Transform spawnPointOfCube)
     {
         cube = Instantiate(cube, spawnPointOfCube.position, transform.rotation.normalized);
-        cube.GetComponent<CubeInfo>().numberOfCube = startNumberOfCube;
+        cube.GetComponent<Cube>().Number = startNumberOfCube;
         cube.name = startNumberOfCube.ToString();
     }
 }
