@@ -5,37 +5,37 @@ using TMPro;
 
 public class Cube : MonoBehaviour
 {
-    public event Action<Cube, Cube> CollisionWithSameCube;
+    public static event Action<Cube, Cube> CollisionWithSameCube;
     
-    public int Number = 2;
+    public int number = 2;
 
-    [SerializeField] private List<TMP_Text> _textFields;
+    [SerializeField] private List<TMP_Text> textFields;
 
     private Renderer _renderer;
 
     public bool IsTheSameCube(Cube otherCube)
     {
-        return otherCube.Number == Number;
+        return otherCube.number == number;
     }
     
     private void Awake()
     {
         _renderer = GetComponent<Renderer>();
         
-        SetNumber(Number);
+        SetNumber(number);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.TryGetComponent(out Cube cube))
         {
-            OnCollisionWithCobe(cube);
+            OnCollisionWithCube(cube);
         }
     }
 
-    private void OnCollisionWithCobe(Cube cube)
+    private void OnCollisionWithCube(Cube cube)
     {
-        if (cube.Number == Number)
+        if (cube.number == number)
         {
             CollisionWithSameCube?.Invoke(cube, this);
         }
@@ -44,12 +44,12 @@ public class Cube : MonoBehaviour
     public void SetNumber(int number)
     {
         for (int i = 0; i < 6; i++) {
-            _textFields[i].text = number.ToString();
+            textFields[i].text = number.ToString();
         }
-        SetColorByNUmber(number);
+        SetColorByNumber(number);
     }
 
-    private void SetColorByNUmber(int number)
+    private void SetColorByNumber(int number)
     {
         Color customColor = new Color(1.0f / number, 2.0f / number, 0.7f, 1.0f);
         _renderer.material.color = customColor;
