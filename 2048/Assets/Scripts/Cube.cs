@@ -37,6 +37,7 @@ public class Cube : MonoBehaviour
     {
         if (cube.number == number)
         {
+            Debug.Log(name);
             CollisionWithSameCube?.Invoke(cube, this);
         }
     }
