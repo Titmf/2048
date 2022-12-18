@@ -5,7 +5,7 @@ using TMPro;
 
 public class Cube : MonoBehaviour
 {
-    public static event Action<Cube, Cube> CollisionWithSameCube;
+    public event Action<Cube, Cube> CollisionWithSameCube;
     
     public int number = 2;
 
@@ -13,11 +13,6 @@ public class Cube : MonoBehaviour
 
     private Renderer _renderer;
 
-    public bool IsTheSameCube(Cube otherCube)
-    {
-        return otherCube.number == number;
-    }
-    
     private void Awake()
     {
         _renderer = GetComponent<Renderer>();
@@ -33,21 +28,25 @@ public class Cube : MonoBehaviour
         }
     }
 
-    private void OnCollisionWithCube(Cube cube)
-    {
-        if (cube.number == number)
-        {
-            Debug.Log(name);
-            CollisionWithSameCube?.Invoke(cube, this);
-        }
-    }
-
     public void SetNumber(int number)
     {
         for (int i = 0; i < 6; i++) {
             textFields[i].text = number.ToString();
         }
         SetColorByNumber(number);
+    }
+
+    private bool IsTheSameCube(Cube otherCube)
+    {
+        return otherCube.number == number;
+    }
+
+    private void OnCollisionWithCube(Cube cube)
+    {
+        if (IsTheSameCube(cube))
+        {
+            CollisionWithSameCube?.Invoke(cube, this);
+        }
     }
 
     private void SetColorByNumber(int number)
