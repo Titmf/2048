@@ -3,21 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+using UnityEngine.Serialization;
+
 public class Cube : MonoBehaviour
 {
     public event Action<Cube, Cube> CollisionWithSameCube;
+
+    public int Number { get; private set; } = 2;
+
+    [SerializeField] private List<TMP_Text> _textFields;
+    [SerializeField] private Rigidbody _rigidbody;
     
-    public int number = 2;
-
-    [SerializeField] private List<TMP_Text> textFields;
-
     private Renderer _renderer;
 
     private void Awake()
     {
         _renderer = GetComponent<Renderer>();
         
-        SetNumber(number);
+        SetNumber(Number);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -27,18 +30,31 @@ public class Cube : MonoBehaviour
             OnCollisionWithCube(cube);
         }
     }
-
     public void SetNumber(int number)
     {
-        for (int i = 0; i < 6; i++) {
-            textFields[i].text = number.ToString();
+        Number = number;
+        
+        for (var i = 0; i < 6; i++) {
+            _textFields[i].text = number.ToString();
         }
+        
         SetColorByNumber(number);
     }
 
+    public void Freeze()
+    {
+        _rigidbody.isKinematic = true;
+    }
+
+    public void Kick(Vector3 force)
+    {
+        _rigidbody.AddForce(force, ForceMode.Impulse);
+        _rigidbody.useGravity = true;
+    } 
+    
     private bool IsTheSameCube(Cube otherCube)
     {
-        return otherCube.number == number;
+        return otherCube.Number == Number;
     }
 
     private void OnCollisionWithCube(Cube cube)
@@ -51,7 +67,7 @@ public class Cube : MonoBehaviour
 
     private void SetColorByNumber(int number)
     {
-        Color customColor = new Color(1.0f / number, 2.0f / number, 0.7f, 1.0f);
+        var customColor = new Color(1.0f / number, 2.0f / number, 0.7f, 1.0f);
         _renderer.material.color = customColor;
     }
 } 

@@ -2,27 +2,31 @@ using UnityEngine;
 
 public class Fabric : MonoBehaviour
 {
-    [SerializeField] private GameObject cube;
-    [SerializeField] private Transform spawnPoint;
+    [SerializeField] private Cube _cubePrefab;
 
-    private readonly int[] _startNumber = {2,4,8,16,32,64};
-
-    private void OnMouseUp()
+    private readonly int[] _startNumbers = {2,4,8,16,32,64};
+    
+    public Cube CreateCubeWithRandomNumber(Vector3 position)
     {
-        cube.GetComponent<Rigidbody>().AddForce(Vector3.forward*2000f);
-        cube.GetComponent<Rigidbody>().useGravity = true;
+        var number = GetRandomStartNumber();
+        
+        return CreateCube(number, position);
+    }
+    
+    public Cube CreateCube(int number, Vector3 position)
+    {
+        var cube = Instantiate(_cubePrefab, position, Quaternion.identity);
+        
+        cube.name = number.ToString();
+        cube.SetNumber(number);
+        
+        return cube;
     }
 
-    private void OnMouseDown()
+    private int GetRandomStartNumber()
     {
-        CreateCube(_startNumber[new System.Random().Next(0, _startNumber.Length)], spawnPoint);
-    }
-
-    private void CreateCube(int startNumberOfCube, Transform spawnPointOfCube)
-    {
-        cube = Instantiate(cube, spawnPointOfCube.position, spawnPointOfCube.rotation);
-        cube.GetComponent<Cube>().number = startNumberOfCube;
-        cube.name = startNumberOfCube.ToString();
-        cube.GetComponent<Cube>().SetNumber(startNumberOfCube);
+        var index = Random.Range(0, _startNumbers.Length);
+        
+        return _startNumbers[index];
     }
 }

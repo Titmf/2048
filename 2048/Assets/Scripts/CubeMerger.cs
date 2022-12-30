@@ -1,37 +1,36 @@
+using Unity.VisualScripting;
+
 using UnityEngine;
 
 public class CubeMerger : MonoBehaviour
 {
-    public Vector3 centerBetweenCubes;
-
     private Rigidbody _rigidbody1Cube;
     private Rigidbody _rigidbody2Cube;
-    
-    private void Awake()
+
+    public void Merge(Cube cube1, Cube cube2)
     {
-        Cube.CollisionWithSameCube += Merge;
+        cube1.Freeze();
+        cube2.Freeze();
+        
+        MoveToCenterBetween(cube1.transform, cube2.transform);
+        
+        cube2.SetNumber(cube2.Number * 2);
+        
+        Destroy(cube1.gameObject);
     }
 
-    private void Merge(Cube cube1,Cube cube2)
+    private void MoveToCenterBetween(Transform cube1, Transform cube2)
     {
-        CalculateCenterBetweenCubes(cube1, cube2);
-        MoveCubesToCenterBetweenThem(cube1,cube2);
-        cube2.SetNumber(cube2.number*2);
-        Destroy(cube1.GameObject());
+        var center = GetCenterBetween(cube1, cube2);
+        
+        cube1.position = center;
+        cube2.position = center;
     }
 
-    private void MoveCubesToCenterBetweenThem(Component cube1,Component cube2)
-    {   
-        _rigidbody1Cube = cube1.GetComponentInParent(typeof(Rigidbody)) as Rigidbody;
-        _rigidbody1Cube.isKinematic = true;
-        _rigidbody2Cube.isKinematic = true;
-        cube1.GetComponentInParent<Collider>().enabled = false;
-        cube1.transform.position = centerBetweenCubes;
-        cube2.transform.position = centerBetweenCubes;
-    }
-
-    private void CalculateCenterBetweenCubes(Component cube1, Component cube2)
+    private Vector3 GetCenterBetween(Transform cube1, Transform cube2)
     {
-        centerBetweenCubes = (cube1.transform.position - cube2.transform.position)/2;
+        var vector = cube1.position - cube2.position;
+        
+        return vector * 0.5f;
     }
 }
