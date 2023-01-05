@@ -3,36 +3,25 @@ using UnityEngine;
 public class Game : MonoBehaviour
 {
     [SerializeField] private CubeMerger _cubeMerger;
-    [SerializeField] private Transform _spawnPoint;
+    [SerializeField] private Transform _catapultLocation;
     [SerializeField] private Fabric _fabric;
     [SerializeField] private UIHandle _uiHandle;
-    [SerializeField] private float _cubeKickForce = 10f;
-
-    private Cube _tackedCube;
+    [SerializeField] private Catapult _catapult;
     
     private void OnEnable()
     {
-        _uiHandle.MouseDown += OnMouseDown;
-        _uiHandle.MouseUp += OnMouseUp;
+        _uiHandle.MouseDown += _catapult.LoadInto;
+        _uiHandle.MouseUp += _catapult.ThrowProjectile;
     }
     private void OnDisable()
     {
-        _uiHandle.MouseDown -= OnMouseDown;
-        _uiHandle.MouseUp -= OnMouseUp;
+        _uiHandle.MouseDown -= _catapult.LoadInto;
+        _uiHandle.MouseUp -= _catapult.ThrowProjectile;
     }
 
-    private void OnMouseDown()
+    public Cube SpawnCube()
     {
-        _tackedCube = SpawnCube();
-    }
-    private void OnMouseUp()
-    {
-        _tackedCube.Kick(Vector3.forward * _cubeKickForce);
-    }
-    
-    private Cube SpawnCube()
-    {
-        var cube = _fabric.CreateCubeWithRandomNumber(_spawnPoint.position);
+        var cube = _fabric.CreateCubeWithRandomNumber(_catapultLocation.position);
         cube.CollisionWithSameCube += OnCollisionWith;
         
         return cube;
