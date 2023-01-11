@@ -12,8 +12,10 @@ public class CubeMerger : MonoBehaviour
         
         MoveToCenterBetween(cube1.transform, cube2.transform);
         
-        cube2.SetNumber(cube2.Number * 2);
+        cube2.UnFreeze();
         
+        cube2.SetNumber(cube2.Number * 2);
+
         Destroy(cube1.gameObject);
     }
 
@@ -21,7 +23,6 @@ public class CubeMerger : MonoBehaviour
     {
         var center = GetCenterBetween(cube1, cube2);
         
-        cube1.position = center;
         cube2.position = center;
     }
 
@@ -29,6 +30,6 @@ public class CubeMerger : MonoBehaviour
     {
         var vector = cube1.position - cube2.position;
         
-        return vector * 0.5f;
+        return (cube2.position + vector * 0.5f);
     }
 }

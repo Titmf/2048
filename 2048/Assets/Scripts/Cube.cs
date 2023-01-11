@@ -43,12 +43,16 @@ public class Cube : MonoBehaviour
     {
         _rigidbody.isKinematic = true;
     }
+    public void UnFreeze()
+    {
+        _rigidbody.isKinematic = false;
+    }
 
     public void Kick(Vector3 force)
     {
         _rigidbody.AddForce(force, ForceMode.Impulse);
         _rigidbody.useGravity = true;
-    } 
+    }
     
     private bool IsTheSameCube(Cube otherCube)
     {
