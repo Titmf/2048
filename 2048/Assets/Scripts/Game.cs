@@ -12,11 +12,13 @@ public class Game : MonoBehaviour
     {
         _uiHandle.MouseDown += _catapult.LoadInto;
         _uiHandle.MouseUp += _catapult.ThrowProjectile;
+        _uiHandle.MouseMove += _catapult.ProjectileFollowing;
     }
     private void OnDisable()
     {
         _uiHandle.MouseDown -= _catapult.LoadInto;
         _uiHandle.MouseUp -= _catapult.ThrowProjectile;
+        _uiHandle.MouseMove -= _catapult.ProjectileFollowing;
     }
 
     public Cube SpawnCube()

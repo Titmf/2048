@@ -17,8 +17,7 @@ public class Catapult: MonoBehaviour
         _loadedProjectile.Kick(Vector3.forward * _cubeKickForce);
         _loadedProjectile = null;
     }
-    
-    private void Update()
+    public void ProjectileFollowing()
     {
         if (_loadedProjectile != null)
         {

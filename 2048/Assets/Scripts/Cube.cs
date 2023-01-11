@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-using UnityEngine.Serialization;
-
 public class Cube : MonoBehaviour
 {
     public event Action<Cube, Cube> CollisionWithSameCube;
