@@ -4,9 +4,10 @@ public class Catapult: MonoBehaviour
 {
     [SerializeField] private float _cubeKickForce = 10f;
     [SerializeField] private Game _game;
-    [SerializeField] private Transform _catapultLocation;
 
     private Cube _loadedProjectile;
+
+    private Vector3 _offsetDelta;
 
     public void LoadInto()
     {
@@ -15,13 +16,10 @@ public class Catapult: MonoBehaviour
     public void ThrowProjectile()
     {
         _loadedProjectile.Kick(Vector3.forward * _cubeKickForce);
-        _loadedProjectile = null;
     }
-    public void ProjectileFollowing()
+    public void ProjectileFollowing(Vector2 deltaValue)
     {
-        if (_loadedProjectile != null)
-        {
-            _loadedProjectile.transform.position = _catapultLocation.position;   
-        }
+        _offsetDelta = new Vector3(deltaValue.x, 0, 0);
+        _loadedProjectile.transform.position += _offsetDelta;
     }
 }

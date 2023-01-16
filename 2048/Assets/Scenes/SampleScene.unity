@@ -1057,7 +1057,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cubeKickForce: 50
   _game: {fileID: 1108647650}
-  _catapultLocation: {fileID: 740621505}
 --- !u!1 &1178505050
 GameObject:
   m_ObjectHideFlags: 0

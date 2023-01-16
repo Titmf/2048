@@ -3,22 +3,27 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UIHandle : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerMoveHandler
+public class UIHandle : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+    private Vector2 _offsetDelta = Vector2.zero;
+    
     public event Action MouseDown;
-    public event Action MouseMove;
+    public event Action<Vector2> MouseMove;
     public event Action MouseUp;
 
-    public void OnPointerDown(PointerEventData eventData)
+    public void OnBeginDrag(PointerEventData eventData)
     {
+        _offsetDelta = Vector2.zero;
         MouseDown?.Invoke();
     }
-    public void OnPointerMove(PointerEventData eventData)
+    public void OnDrag(PointerEventData eventData)
     {
-        MouseMove?.Invoke();
+        _offsetDelta = eventData.delta/100f;
+        MouseMove?.Invoke(_offsetDelta);
     }
-    public void OnPointerUp(PointerEventData eventData)
+    public void OnEndDrag(PointerEventData eventData)
     {
+        _offsetDelta = Vector2.zero;
         MouseUp?.Invoke();
     }
 }
