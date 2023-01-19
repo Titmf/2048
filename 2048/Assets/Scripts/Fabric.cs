@@ -4,7 +4,7 @@ public class Fabric : MonoBehaviour
 {
     [SerializeField] private Cube _cubePrefab;
 
-    private readonly int[] _startNumbers = {2,4,8,16,32,64};
+    private readonly int[] _startNumbers = { 2, 4, 8, 16, 32, 64 };
     
     public Cube CreateCubeWithRandomNumber(Vector3 position)
     {

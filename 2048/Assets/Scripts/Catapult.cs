@@ -3,23 +3,19 @@ using UnityEngine;
 public class Catapult: MonoBehaviour
 {
     [SerializeField] private float _cubeKickForce = 10f;
-    [SerializeField] private Game _game;
 
     private Cube _loadedProjectile;
 
-    private Vector3 _offsetDelta;
-
-    public void LoadInto()
+    public void Attach(Cube cube)
     {
-        _loadedProjectile = _game.SpawnCube();
+        _loadedProjectile = cube;
     }
     public void ThrowProjectile()
     {
         _loadedProjectile.Kick(Vector3.forward * _cubeKickForce);
     }
-    public void ProjectileFollowing(Vector2 deltaValue)
+    public void ProjectileFollowing(Vector3 position)
     {
-        _offsetDelta = new Vector3(deltaValue.x, 0, 0);
-        _loadedProjectile.transform.position += _offsetDelta;
+        _loadedProjectile.transform.position = position;
     }
 }
